@@ -35,7 +35,7 @@ jar {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     manifest {
         attributes(
-                'Main-Class': 'org.example'
+                'Main-Class': 'Main'
         )
     }
     from {
