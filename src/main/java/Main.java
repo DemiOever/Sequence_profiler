@@ -10,7 +10,7 @@ public class Main {
             List<String> seqs = reader.readSequences(Paths.get("C:/Users/DemiS/Documents/School/Schooljaar_24_25/sequence.fasta"));
             seqs.forEach(System.out::println);
         } catch (IOException e) {
-            System.err.println("Fout bij inlezen: " + e.getMessage());
+            System.err.println("Error during reading: " + e.getMessage());
         }
     }
 
