@@ -8,19 +8,18 @@ import picocli.CommandLine.Option;
 
 import java.util.Arrays;
 
-@CommandLine.Command(name="VCFfilter", version="VCFfilter 0.1", mixinStandardHelpOptions = true)
+@CommandLine.Command(name="SequenceProfiler", version="SequenceProfiler 0.1", mixinStandardHelpOptions = true)
 public class CommandlineProcessor implements Runnable {
     private static Logger logger = LogManager.getLogger(CommandlineProcessor.class.getName());
 
-    @Parameters(index = "0", paramLabel = "<output>", description = "Output VCF file name")
-    private String outputVCF;
+    @Option(names = {"-i", "--input-file"}, required = true)
+    private String[] inputFasta;
 
-    // FIXME: should be required, but is ignored
-    @Parameters(index = "1..*", description = "Input VCF file(s)")
-    private String[] inputVCF;
+    @Option(names = {"-op", "--output-profile"}, required = false)
+    private String outputProfileFile;
 
-    @Option(names = {"-f", "--filter-value"}, description = "Filter value")
-    private int filterOptions;
+    @Option(names = {"-o", "--output-file"}, required = false)
+    private String outputFile;
 
     @Option(names = {"-v"}, description = "Verbose logging")
     private boolean[] verbose = new boolean[0];
@@ -34,9 +33,9 @@ public class CommandlineProcessor implements Runnable {
         }
         logger.debug("Processing input arguments ...");
 
-        logger.info("Output file: {}", outputVCF);
-        logger.info("Input VCF files: {}", Arrays.toString(inputVCF));
-        logger.info("Filter options: {}", filterOptions);
+        logger.info("Input FASTA file(s): {}", Arrays.toString(inputFasta));
+        logger.info("Output profile file: {}", outputProfileFile);
+        logger.info("Output full result file: {}", outputFile);
         logger.info("Verbosity: {}", Arrays.toString(verbose));
 
         // Do something with the input
