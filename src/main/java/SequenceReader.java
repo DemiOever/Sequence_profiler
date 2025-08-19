@@ -3,7 +3,13 @@ import java.nio.file.*;
 import java.util.*;
 
 public class SequenceReader {
-    private static final Set<Character> VALID_CHARS = Set.of('A', 'C', 'G', 'T', '-', '.');
+    private static final Set<Character> VALID_CHARS = Set.of(
+            'A','C','G','T',
+            'R','Y','S','W','K','M',
+            'B','D','H','V',
+            'N',
+            '-', '.'
+    );
 
     /**
      * Reads DNA sequences from a FASTA file.
