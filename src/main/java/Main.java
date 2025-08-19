@@ -1,17 +1,11 @@
-import picocli.CommandLine;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.List;
+import java.nio.file.*;
 
 public class Main {
     public static void main(String[] args) {
-        SequenceReader reader = new SequenceReader();
-        try {
-            List<String> seqs = reader.readSequences(Paths.get("C:/Users/DemiS/Documents/School/Schooljaar_24_25/sequence.fasta"));
-            seqs.forEach(System.out::println);
-        } catch (IOException e) {
-            System.err.println("Error during reading: " + e.getMessage());
-        }
-    }
+        // Later this will be replaced with CLI parsing (-i and -o)
+        Path fastaFile = Paths.get("C:/Users/DemiS/Documents/School/Schooljaar_24_25/60_amniota_vertebrates_Mercator_Pecan.fa");
 
+        SequenceProcessor processor = new SequenceProcessor();
+        processor.process(fastaFile);
+    }
 }
