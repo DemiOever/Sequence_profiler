@@ -1,35 +1,50 @@
 import java.nio.file.*;
 import java.util.*;
+import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SequenceProcessor {
+    private static final Logger logger = LogManager.getLogger(SequenceProcessor.class);
 
     private final SequenceReader reader = new SequenceReader();
+    private final IUPACProfileBuilder builder = new IUPACProfileBuilder();
 
-    public void process(Path fastaFile) {
+    public void process(Path fastaFile, Path outputFile) {
         try {
+            logger.info("Starting sequence processing...");
+            logger.debug("Reading input file: {}", fastaFile.toAbsolutePath());
+
             List<String> sequences = reader.readSequences(fastaFile);
 
-            // Number of sequences
-            System.out.println("Number of sequences: " + sequences.size());
+            logger.info("Number of sequences: {}", sequences.size());
+            logger.info("Alignment length: {}", sequences.get(0).length());
 
-            // Length of the first sequence
-            int length = sequences.get(0).length();
-            System.out.println("Alignment length: " + length);
-
-            // Check if all sequences have the same length
-            boolean allSameLength = sequences.stream().allMatch(seq -> seq.length() == length);
-            if (!allSameLength) {
-                System.out.println("Not all sequences have the same length!");
+            // Validation: equal length check
+            boolean allEqual = sequences.stream()
+                    .map(String::length)
+                    .distinct()
+                    .count() == 1;
+            if (allEqual) {
+                logger.info("All sequences are aligned (equal length).");
             } else {
-                System.out.println("All sequences are aligned (equal length).");
+                logger.warn("Sequences have different lengths!");
             }
 
-            // Preview first sequence
-            System.out.println("\nPreview of first sequence:");
-            System.out.println(sequences.get(0).substring(0, Math.min(50, length)));
+            logger.debug("Preview of first sequence: {}...",
+                    sequences.get(0).substring(0, Math.min(50, sequences.get(0).length())));
 
-        } catch (Exception e) {
-            System.err.println("Error while processing: " + e.getMessage());
+            // Build and print IUPAC profile
+            String profile = builder.buildProfile(sequences);
+            logger.info("IUPAC profile generated (length {} characters)", profile.length());
+
+            // Save profile to file
+            ReturnFile writer = new ReturnFile();
+            writer.writeProfile(profile, outputFile);
+            logger.info("Profile successfully saved to {}", outputFile.toAbsolutePath());
+
+        } catch (IOException e) {
+            logger.error("Error while processing: {}", e.getMessage(), e);
         }
     }
 }
