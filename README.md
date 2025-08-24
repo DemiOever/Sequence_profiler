@@ -31,7 +31,6 @@ java -jar SequenceProfiler.jar -i <input-file> [-op <output-profile>] [-o <outpu
 ```
 
 ## Command Options
-### Command Options
 
 | Option                  | Description                                         |
 |-------------------------|-----------------------------------------------------|
@@ -40,3 +39,33 @@ java -jar SequenceProfiler.jar -i <input-file> [-op <output-profile>] [-o <outpu
 | **-o, --output_file**   | File path to save full results (optional)           |
 | **-v**                  | Verbose logging                                     |
 | **-h, --help**                    | Help                            |
+
+## Example usage
+
+```bash
+java -jar build/libs/Sequence_profiler-1.0-SNAPSHOT.jar -i "60_amniota_vertebrates_Mercator_Pecan.fa" -op profile.txt
+```
+You can replace the input, output profile, etc. with your own files and file paths.
+
+## IUPAC ambiguity codes
+
+Where each letter represents:
+
+- A, C, G, T  -> single nucleotide
+- R           -> A or G
+- Y           -> C or T
+- S           -> G or C
+- W           -> A or T
+- K           -> G or T
+- M           -> A or C
+- B           -> C, G, or T
+- D           -> A, G, or T
+- H           -> A, C, or T
+- V           -> A, C, or G
+- N           -> any nucleotide
+
+## Contact
+
+If you have questions or need any support, please contact me:
+
+- **D. van 't Oever**: [d.van.t.oever@st.hanze.nl](mailto:d.van.t.oever@st.hanze.nl)
