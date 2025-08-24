@@ -45,12 +45,8 @@ public class IUPACProfileBuilder {
         }
 
         int length = sequences.get(0).length();
-
-        // Check equal length
-        for (String seq : sequences) {
-            if (seq.length() != length) {
-                throw new IllegalArgumentException("Sequences are not aligned (different lengths)");
-            }
+        if (sequences.stream().anyMatch(s -> s.length() != length)) {
+            throw new IllegalArgumentException("Sequences are not aligned (different lengths)");
         }
 
         StringBuilder profile = new StringBuilder();
