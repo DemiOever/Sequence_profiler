@@ -1,6 +1,11 @@
+package Logic;
+
 import java.nio.file.*;
 import java.util.*;
 import java.io.IOException;
+
+import IO.ReturnFile;
+import IO.SequenceReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
