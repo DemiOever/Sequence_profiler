@@ -4,7 +4,7 @@ import picocli.CommandLine;
 
 public class Main {
     public static void main(String[] args) {
-        Configurator.setRootLevel(Level.DEBUG);
+        Configurator.setRootLevel(Level.INFO);
 
         int exitCode = new CommandLine(new CommandlineProcessor()).execute(args);
         System.exit(exitCode);
