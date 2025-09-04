@@ -43,9 +43,10 @@ public class SequenceProcessor {
             String profile = builder.buildProfile(sequences);
             logger.info("IUPAC profile generated (length {} characters)", profile.length());
 
-            // Save profile to file
             ReturnFile writer = new ReturnFile();
             writer.writeProfile(profile, outputFile);
+            writer.logProfile(profile);
+
             logger.info("Profile successfully saved to {}", outputFile.toAbsolutePath());
 
         } catch (IOException e) {
