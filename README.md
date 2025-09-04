@@ -47,6 +47,8 @@ java -jar build/libs/Sequence_profiler-1.0-SNAPSHOT.jar -i "60_amniota_vertebrat
 ```
 You can replace the input, output profile, etc. with your own files and file paths.
 
+This repository also contains a folder called "ExampleData." It contains two example data files. The first is "sequence.fasta," which is incorrect code and will not be usable by the SequenceProfiler. The second file, "60_amniota_vertebrates_Mercator_Pecan.fa," is the code that will actually produce results. Of course, anyone is free to use the SequenceProfiler with their own code.
+
 ## IUPAC ambiguity codes
 
 Where each letter represents:
